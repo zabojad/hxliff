@@ -4,7 +4,7 @@ Author: Thomas Fétiveau, www.tokom.fr
 
 Cross platform XLIFF parser coded with haxe (www.haxe.org). This XLIFF implementation is far from beeing completed and has been compiled and tested so far only in javascript and as3.
 
-Further improvments will be pushed and more platform are to be supported.
+Further improvments will be pushed and more platforms are to be supported.
 
 If you use and enjoy this lib, feel free to contribute by reporting bugs, proposing improvments...
 
