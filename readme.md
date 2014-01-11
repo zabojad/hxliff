@@ -26,17 +26,17 @@ You can find the Hxliff binaries for each platform there:
 
  - Then, call the hxliff parser like this (here using JQuery to load the .xlf file):
 
- ```
- // store parameters in a single object
- window.params = {};
+```
+// store parameters in a single object
+window.params = {};
 
- // (...)
+// (...)
 
- // init the langs object
- window.params.langs = {};
- 
- // load and parse the XLIFF file
- $(document).load( "http://mydomain/en.xlf", function(data,status,hxr) {
+// init the langs object
+window.params.langs = {};
+
+// load and parse the XLIFF file
+$(document).load( "http://mydomain/en.xlf", function(data,status,hxr) {
 
 		if ( status == "error" ) {
 
@@ -51,10 +51,9 @@ You can find the Hxliff binaries for each platform there:
 		}
 	});
 
-
 // translate some text
 $("#myFirstText").text(window.params.langs.en["1"]); // assign text from trans-unit with id "1" of locale "en" to myFirstText
- ```
+```
 
 ##Using Hxliff in Flash / Flex / as3
 
@@ -62,9 +61,9 @@ $("#myFirstText").text(window.params.langs.en["1"]); // assign text from trans-u
 
  - On the first frame of your fla (or in your project main class), add this before anything else:
 
- ```
+```
  haxe.initSwc(root as MovieClip);
- ```
+```
 
  - Then wherever you want in your code, you can call the hxliff parser to parse XLIFF content:
 
