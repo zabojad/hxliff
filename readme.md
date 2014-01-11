@@ -18,7 +18,7 @@ You can find the Hxliff binaries for each platform there:
 
 ##Using Hxliff in javascript
 
- - Load the hxliff script into your current DOM document, for example with a <script> tag like this:
+ - Load the hxliff script into your current DOM document, for example with a &lt;script&gt; tag like this:
 
 ```
  <script type="text/javascript" src="http://localhost/accor/lib/hxliff.js"></script>
