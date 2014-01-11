@@ -1,0 +1,6 @@
+dist/*.js
+dist/*.swc
+*.js.map
+*.sublime-project
+*.sublime-workspace
+*.DS_Store
