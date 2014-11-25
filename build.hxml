@@ -3,10 +3,8 @@
 # [No Main] (js:No output)
 # -main [No Main]
 -js dist/hxliff.js
--cp src
 --macro include('hxliff')
 
 --next
 -swf dist/hxliff.swc
--cp src
 --macro include('hxliff')

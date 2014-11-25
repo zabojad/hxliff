@@ -2,12 +2,6 @@ package hxliff;
 
 using hxliff.util.XmlTools;
 
-typedef TransUnit = {
-
-	var id : String;
-	var transUnit : String;
-}
-
 @:expose("hxliff.Parser")
 class Parser {
 
@@ -20,18 +14,20 @@ class Parser {
 	static inline var NODE_NAME_TARGET : String = "target";
 
 	static inline var ATTR_NAME_ID : String = "id";
+	static inline var ATTR_NAME_RESNAME : String = "resname";
 	static inline var ATTR_NAME_SOURCE_LANG : String = "source-language";
 	static inline var ATTR_NAME_TARGET_LANG : String = "target-language";
 
-	public static function parse(s:String):{ locale: String, data: Dynamic } {
+	public static function parse(s : String) : Xliff {
 
 		var n : Xml = Xml.parse(s);
 
-		var tus : Dynamic = {};
+		var transUnits : Map<String, TransUnit> = new Map();
 
-		var locale : Null<String> = null;
+		var source : Null<String> = null;
+		var target : Null<String> = null;
 
-		for(xlfXml in n.elements()) {
+		for (xlfXml in n.elements()) {
 
 			switch (xlfXml.nodeName.toLowerCase()) {
 
@@ -49,14 +45,11 @@ class Parser {
 
 										case ATTR_NAME_SOURCE_LANG:
 
-											if (locale == null) {
-
-												locale = fXml.get(xlfAttr);
-											}
+											source = fXml.get(xlfAttr);
 
 										case ATTR_NAME_TARGET_LANG:
 
-											locale = fXml.get(xlfAttr);
+											target = fXml.get(xlfAttr);
 									}
 								}
 
@@ -74,7 +67,7 @@ class Parser {
 
 														var tu : TransUnit = xml2TransUnit(tuXml);
 
-														Reflect.setField( tus, tu.id, tu.transUnit );
+														transUnits.set(tu.id, tu);
 
 													default:
 
@@ -102,13 +95,15 @@ class Parser {
 					throw "unexpected node " + xlfXml.nodeName;
 			}
 		}
-		return { locale: locale, data: tus };
+		return new Xliff(source, target, transUnits);
 	}
 
 	static function xml2TransUnit(n:Xml):TransUnit {
 
-		var id:Null<String> = null;
-		var val:Null<String> = null;
+		var id : Null<String> = null;
+		var resname : Null<String> = null;
+		var source : String = null;
+		var target : Null<String> = null;
 
 		for (tuAttr in n.attributes()) {
 
@@ -117,6 +112,10 @@ class Parser {
 				case ATTR_NAME_ID:
 
 					id = n.get(tuAttr);
+
+				case ATTR_NAME_RESNAME:
+
+					resname = n.get(tuAttr);
 			}
 		}
 
@@ -126,20 +125,17 @@ class Parser {
 
 				case NODE_NAME_SOURCE:
 
-					if (val == null) {
-
-						val = tuXml.getSingleTextContent();
-					}
+					source = tuXml.getSingleTextContent();
 
 				case NODE_NAME_TARGET:
 
-					val = tuXml.getSingleTextContent();
+					target = tuXml.getSingleTextContent();
 
 				default:
 
 					throw "unexpected node "+tuXml.nodeName;
 			}
 		}
-		return { id: id, transUnit: val };
+		return { id : id, resname : resname, source : source, target : target };
 	}
 }
