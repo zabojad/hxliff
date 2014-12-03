@@ -44,11 +44,19 @@ class Xliff {
 		}
 		if (l.getLang() == source) {
 
-			return transUnits.get(id).source;
+			if (transUnits.exists(id)) {
+
+				return transUnits.get(id).source;
+			}
+			return id;
 
 		} else if (l.getLang() == target) {
 
-			return transUnits.get(id).target;
+			if (transUnits.exists(id)) {
+
+				return transUnits.get(id).target;
+			}
+			return id;
 		
 		} else  {
 
