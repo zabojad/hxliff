@@ -9,13 +9,23 @@ class Xliff {
 		this.transUnits = transUnits;
 	}
 
-	var source : String;
-	var target : String;
 	var transUnits : Map<String, TransUnit>;
 
 	///
 	// Public Interface
 	//
+
+	public var source (default, null) : String;
+
+	public var target (get, null) : String;
+
+	public function get_target() : String {
+
+		if (target == null) {
+			return source;
+		}
+		return target;
+	}
 
 	static public function parse(data : String) : Xliff {
 

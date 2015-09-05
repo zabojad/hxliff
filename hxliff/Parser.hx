@@ -9,6 +9,7 @@ class Parser {
 	static inline var NODE_NAME_FILE : String = "file";
 	static inline var NODE_NAME_HEADER : String = "header";
 	static inline var NODE_NAME_BODY : String = "body";
+	static inline var NODE_NAME_GROUP : String = "group";
 	static inline var NODE_NAME_TRANSUNIT : String = "trans-unit";
 	static inline var NODE_NAME_SOURCE : String = "source";
 	static inline var NODE_NAME_TARGET : String = "target";
@@ -62,6 +63,15 @@ class Parser {
 											for( tuXml in bXml.elements() ) {
 
 												switch (tuXml.nodeName) {
+
+													case NODE_NAME_GROUP:
+
+														for( ttuXml in tuXml.elements() ) {
+
+															var tu : TransUnit = xml2TransUnit(ttuXml);
+
+															transUnits.set(tu.id, tu);
+														}
 					
 													case NODE_NAME_TRANSUNIT:
 
@@ -125,11 +135,11 @@ class Parser {
 
 				case NODE_NAME_SOURCE:
 
-					source = tuXml.getSingleTextContent();
+					source = tuXml.firstChild().nodeValue;
 
 				case NODE_NAME_TARGET:
 
-					target = tuXml.getSingleTextContent();
+					target = tuXml.firstChild().nodeValue;
 
 				default:
 

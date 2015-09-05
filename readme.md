@@ -109,3 +109,7 @@ haxe build.hxml
 ##License
 
 Hxliff is open-source, released under the MIT licence, see license.txt.
+
+##TODO
+
+implements http://docs.oasis-open.org/xliff/v1.2/xliff-profile-html/xliff-profile-html-1.2-cd02.html#Elem_Inlines
